@@ -1,4 +1,4 @@
-const Ship = require("../src/ship");
+const Ship = require("../ship");
 
 it("inital ship setup", () => {
   const testShip = new Ship(4);
