@@ -4,6 +4,9 @@ class Ship {
     this.hits = hits;
     this.sunk = sunk;
   }
+  hit() {
+    this.hits++;
+  }
 }
 
 module.exports = Ship;
