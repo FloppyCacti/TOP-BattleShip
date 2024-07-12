@@ -7,6 +7,9 @@ class Ship {
   hit() {
     this.hits++;
   }
+  isSunk() {
+    if (this.length === this.hits) this.sunk = true;
+  }
 }
 
 module.exports = Ship;
