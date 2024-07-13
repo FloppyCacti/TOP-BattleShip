@@ -35,6 +35,29 @@ class Gameboard {
       return false;
     }
   }
+
+  receiveAttack(point) {
+    if (this.pointContainsShip(point)) {
+      this.board[point[0]][point[1]].hit();
+      return "Hit";
+    }
+    return point;
+  }
+
+  pointContainsShip(point) {
+    if (this.board[point[0]][point[1]] === "Hit") {
+      return false;
+    }
+    if (this.board[point[0]][point[1]] === "") {
+      this.board[point[0]][point[1]] = "Hit";
+      return false;
+    }
+    if (typeof this.board[point[0]][point[1]] === "object") {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 module.exports = Gameboard;
