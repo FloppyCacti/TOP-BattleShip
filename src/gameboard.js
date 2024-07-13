@@ -8,7 +8,7 @@ class Gameboard {
     for (let i = 0; i < 10; i++) {
       let row = [];
       for (let j = 0; j < 10; j++) {
-        row.push([]);
+        row.push(0);
       }
       arr.push(row);
     }
@@ -16,8 +16,25 @@ class Gameboard {
   }
 
   place(ship, point, isVertical) {
-    if (!this.pointValid(ship, point, isVertical)) return "Outside of range";
-    this.board[point[0]][point[1]] = ship;
+    if (
+      !this.pointValid(ship, point, isVertical) ||
+      this.pointContainsShip(point, 1, ship, isVertical)
+    )
+      return "Outside of range or too close to another ship";
+    this.placeShip(ship, point, isVertical);
+  }
+
+  placeShip(ship, point, isVertical) {
+    const [x, y] = point;
+    if (isVertical) {
+      for (let i = 0; i < ship.length; i++) {
+        this.board[x][y + i] = ship;
+      }
+    } else {
+      for (let i = 0; i < ship.length; i++) {
+        this.board[x + i][y] = ship;
+      }
+    }
   }
 
   pointValid(ship, point, isVertical) {
@@ -44,17 +61,39 @@ class Gameboard {
     return point;
   }
 
-  pointContainsShip(point) {
-    if (this.board[point[0]][point[1]] === "Hit") {
-      return false;
-    }
-    if (this.board[point[0]][point[1]] === "") {
-      this.board[point[0]][point[1]] = "Hit";
-      return false;
-    }
-    if (typeof this.board[point[0]][point[1]] === "object") {
-      return true;
+  pointContainsShip(point, border = 0, ship, isVertical) {
+    const [x, y] = point;
+    const board = this.board;
+
+    if (border === 0) {
+      const cell = board[x][y];
+      return typeof cell === "object";
     } else {
+      if (isVertical) {
+        for (let i = 0; i < ship.length; i++) {
+          // Check within the board boundaries to avoid out-of-bounds errors
+          if (
+            (x + i < board.length &&
+              typeof board[x + i][y + border] === "object") ||
+            (x + i < board.length &&
+              typeof board[x + i][y - border] === "object")
+          ) {
+            return true;
+          }
+        }
+      } else {
+        for (let i = 0; i < ship.length; i++) {
+          // Check within the board boundaries to avoid out-of-bounds errors
+          if (
+            (y + i < board[0].length &&
+              typeof board[x + border][y + i] === "object") ||
+            (y + i < board[0].length &&
+              typeof board[x - border][y + i] === "object")
+          ) {
+            return true;
+          }
+        }
+      }
       return false;
     }
   }
