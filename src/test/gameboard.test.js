@@ -1,9 +1,12 @@
 const Gameboard = require("../gameboard");
 const Ship = require("../ship");
 
+let gameBoard;
+let testShip;
+
 beforeEach(() => {
-  const gameBoard = new Gameboard();
-  const testShip = new Ship(1);
+  gameBoard = new Gameboard();
+  testShip = new Ship(1);
 });
 
 it("check gameboard size", () => {
