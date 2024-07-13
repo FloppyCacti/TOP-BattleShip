@@ -54,10 +54,16 @@ class Gameboard {
   }
 
   receiveAttack(point) {
+    const [x, y] = point;
     if (this.pointContainsShip(point)) {
-      this.board[point[0]][point[1]].hit();
+      this.board[x][y].hit();
+      this.board[x][y].isSunk();
+      if (this.board[x][y].sunk) {
+        return `ship has been sunk`;
+      }
       return "Hit";
     }
+    this.board[x][y] = 1;
     return point;
   }
 
