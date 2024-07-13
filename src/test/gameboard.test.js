@@ -14,10 +14,10 @@ it("check gameboard size", () => {
 });
 
 it("place ship at specific coordinates", () => {
-  gameBoard.place(testShip, [5][4]);
-  expect(gameBoard.board[5][4]).toBe(testShip);
+  gameBoard.place(testShip, [5, 4]);
+  expect(gameBoard.board[(5, 4)]).toBe(testShip);
 });
 
 it("check if cordinates are invalid", () => {
-  expect(gameBoard.place(testShip, [11][11])).toBe("Outside of range");
+  expect(gameBoard.place(testShip, [11, 11])).toBe("Outside of range");
 });
