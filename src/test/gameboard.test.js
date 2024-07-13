@@ -62,3 +62,8 @@ it("check the ship next to the point", () => {
   gameBoard.place(testShip, [3, 3]);
   expect(gameBoard.pointContainsShip([2, 3], 1, longShip)).toBe(true);
 });
+
+it("check if the ship sunk after hit", () => {
+  gameBoard.place(testShip, [3, 8]);
+  expect(gameBoard.receiveAttack([3, 8])).toBe("ship has been sunk");
+});
