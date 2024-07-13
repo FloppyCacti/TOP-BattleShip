@@ -1,15 +1,20 @@
 const Gameboard = require("../gameboard");
 const Ship = require("../ship");
 
-it("check gameboard size", () => {
+beforeEach(() => {
   const gameBoard = new Gameboard();
+  const testShip = new Ship(1);
+});
+
+it("check gameboard size", () => {
   expect(gameBoard.board.length).toBe(10);
 });
 
 it("place ship at specific coordinates", () => {
-  const testShip = new Ship(1);
-  const gameBoard = new Gameboard();
-
   gameBoard.place(testShip, [5][4]);
   expect(gameBoard.board[5][4]).toBe(testShip);
+});
+
+it("check if cordinates are invalid", () => {
+  expect(gameBoard.place(testShip, [11][11])).toBe("Outside of range");
 });
