@@ -15,7 +15,7 @@ it("check gameboard size", () => {
 
 it("place ship at specific coordinates", () => {
   gameBoard.place(testShip, [5, 4], true);
-  expect(gameBoard.board[(5, 4)]).toBe(testShip);
+  expect(gameBoard.board[5][4]).toBe(testShip);
 });
 
 it("check if cordinates are invalid", () => {
