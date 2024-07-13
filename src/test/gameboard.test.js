@@ -33,5 +33,11 @@ it("check if receiveAttack records hit", () => {
 });
 
 it("check if receiveAttack records misses", () => {
-  expect(gameBoard.receiveAttack([1, 2])).toBe([1, 2]);
+  expect(gameBoard.receiveAttack([1, 2])).toEqual([1, 2]);
+});
+
+it("check if cordinate contain ship", () => {
+  gameBoard.place(testShip, [3, 8]);
+  expect(gameBoard.pointContainsShip([3, 8])).toBe(true);
+  expect(gameBoard.pointContainsShip([1, 1])).toBe(false);
 });
