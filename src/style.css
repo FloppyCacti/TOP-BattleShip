@@ -1,0 +1,32 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#gameboard-container {
+  display: flex;
+  flex-direction: row;
+  margin: 0px auto;
+  gap: 100px;
+}
+
+#playerBoardContainer,
+#computerBoardContainer {
+  height: 500px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cell {
+  height: 50px;
+  width: 50px;
+  background-color: antiquewhite;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
