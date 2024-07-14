@@ -6,13 +6,16 @@ const player = new Player("real");
 const computer = new Player("computer");
 
 // function makes board based on player's gameboard
-function makeGameboardCells(player, container) {
+function makeGameboardCells(player, container, enemy = false) {
   player.gameboard.board.forEach((ele) => {
     let row = document.createElement("div");
     row.classList.add("row");
     ele.forEach((ele) => {
       let col = document.createElement("div");
       col.classList.add("cell");
+      if (enemy) {
+        col.classList.add("enemy");
+      }
       row.appendChild(col);
     });
     container.appendChild(row);
@@ -38,7 +41,7 @@ computerBoardContainer.setAttribute("id", "computerBoardContainer");
 
 // make boards and inserted them into container
 makeGameboardCells(player, playerBoardContainer);
-makeGameboardCells(computer, computerBoardContainer);
+makeGameboardCells(computer, computerBoardContainer, true);
 
 // append board containers to main container
 const gameBoardContainer = document.getElementById("gameboard-container");
@@ -46,4 +49,4 @@ gameBoardContainer.appendChild(playerBoardContainer);
 gameBoardContainer.appendChild(computerBoardContainer);
 
 // cells logic
-cellLogic(document.querySelectorAll(".cell"));
+cellLogic(document.querySelectorAll(".cell.enemy"));
