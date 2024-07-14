@@ -7,16 +7,17 @@ const computer = new Player("computer");
 
 // function makes board based on player's gameboard
 function makeGameboardCells(player, container, enemy = false) {
-  player.gameboard.board.forEach((ele) => {
+  player.gameboard.board.forEach((ele, i) => {
     let row = document.createElement("div");
     row.classList.add("row");
-    ele.forEach((ele, i) => {
+    ele.forEach((ele, j) => {
       let col = document.createElement("div");
       col.classList.add("cell");
       if (enemy) {
         col.classList.add("enemy");
         col.addEventListener("click", () => {
           col.classList.add("hit");
+          computer.gameboard.receiveAttack([i, j]);
         });
       }
       row.appendChild(col);
