@@ -19,6 +19,15 @@ function makeGameboardCells(player, container) {
   });
 }
 
+// cell logic -> click
+function cellLogic(cells) {
+  cells.forEach((ele) => {
+    ele.addEventListener("click", () => {
+      ele.classList.add("hit");
+    });
+  });
+}
+
 // get div that contains the board
 const playerBoardContainer = document.createElement("div");
 const computerBoardContainer = document.createElement("div");
@@ -37,9 +46,4 @@ gameBoardContainer.appendChild(playerBoardContainer);
 gameBoardContainer.appendChild(computerBoardContainer);
 
 // cells logic
-const cells = document.querySelectorAll(".cell");
-cells.forEach((ele) => {
-  ele.addEventListener("click", () => {
-    ele.classList.add("hit");
-  });
-});
+cellLogic(document.querySelectorAll(".cell"));
