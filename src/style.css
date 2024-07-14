@@ -20,13 +20,13 @@ body {
   flex-direction: column;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
 .cell {
   height: 50px;
   width: 50px;
   background-color: antiquewhite;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
 }
