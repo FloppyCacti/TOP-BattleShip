@@ -5,37 +5,31 @@ import "./style.css";
 const player = new Player("real");
 const computer = new Player("computer");
 
-// div contains the board
+// function makes board based on player's gameboard
+function makeGameboardCells(player, container) {
+  player.gameboard.board.forEach((ele) => {
+    let row = document.createElement("div");
+    row.classList.add("row");
+    ele.forEach((ele) => {
+      let col = document.createElement("div");
+      col.classList.add("cell");
+      row.appendChild(col);
+    });
+    container.appendChild(row);
+  });
+}
+
+// get div that contains the board
 const playerBoardContainer = document.createElement("div");
 const computerBoardContainer = document.createElement("div");
 
-// give divs id
+// give container divs id
 playerBoardContainer.setAttribute("id", "playerBoardContainer");
 computerBoardContainer.setAttribute("id", "computerBoardContainer");
 
-// append player board elements to board container
-player.gameboard.board.forEach((ele) => {
-  let row = document.createElement("div");
-  row.classList.add("row");
-  ele.forEach((ele) => {
-    let col = document.createElement("div");
-    col.classList.add("cell");
-    row.appendChild(col);
-  });
-  playerBoardContainer.appendChild(row);
-});
-
-// append computer board elements to board container
-computer.gameboard.board.forEach((ele) => {
-  let row = document.createElement("div");
-  row.classList.add("row");
-  ele.forEach((ele) => {
-    let col = document.createElement("div");
-    col.classList.add("cell");
-    row.appendChild(col);
-  });
-  computerBoardContainer.appendChild(row);
-});
+// make boards and inserted them into container
+makeGameboardCells(player, playerBoardContainer);
+makeGameboardCells(computer, computerBoardContainer);
 
 // append board containers to main container
 const gameBoardContainer = document.getElementById("gameboard-container");
