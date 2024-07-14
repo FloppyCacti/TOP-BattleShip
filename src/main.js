@@ -10,24 +10,18 @@ function makeGameboardCells(player, container, enemy = false) {
   player.gameboard.board.forEach((ele) => {
     let row = document.createElement("div");
     row.classList.add("row");
-    ele.forEach((ele) => {
+    ele.forEach((ele, i) => {
       let col = document.createElement("div");
       col.classList.add("cell");
       if (enemy) {
         col.classList.add("enemy");
+        col.addEventListener("click", () => {
+          col.classList.add("hit");
+        });
       }
       row.appendChild(col);
     });
     container.appendChild(row);
-  });
-}
-
-// cell logic -> click
-function cellLogic(cells) {
-  cells.forEach((ele) => {
-    ele.addEventListener("click", () => {
-      ele.classList.add("hit");
-    });
   });
 }
 
@@ -47,6 +41,3 @@ makeGameboardCells(computer, computerBoardContainer, true);
 const gameBoardContainer = document.getElementById("gameboard-container");
 gameBoardContainer.appendChild(playerBoardContainer);
 gameBoardContainer.appendChild(computerBoardContainer);
-
-// cells logic
-cellLogic(document.querySelectorAll(".cell.enemy"));
