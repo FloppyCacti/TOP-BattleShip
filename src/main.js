@@ -41,3 +41,11 @@ computer.gameboard.board.forEach((ele) => {
 const gameBoardContainer = document.getElementById("gameboard-container");
 gameBoardContainer.appendChild(playerBoardContainer);
 gameBoardContainer.appendChild(computerBoardContainer);
+
+// cells logic
+const cells = document.querySelectorAll(".cell");
+cells.forEach((ele) => {
+  ele.addEventListener("click", () => {
+    ele.classList.add("hit");
+  });
+});
