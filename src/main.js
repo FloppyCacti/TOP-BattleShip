@@ -16,10 +16,10 @@ computerBoardContainer.setAttribute("id", "computerBoardContainer");
 // append player board elements to board container
 player.gameboard.board.forEach((ele) => {
   let row = document.createElement("div");
-  row.classList = "row";
+  row.classList.add("row");
   ele.forEach((ele) => {
     let col = document.createElement("div");
-    col.classList = "cell";
+    col.classList.add("cell");
     row.appendChild(col);
   });
   playerBoardContainer.appendChild(row);
@@ -28,10 +28,10 @@ player.gameboard.board.forEach((ele) => {
 // append computer board elements to board container
 computer.gameboard.board.forEach((ele) => {
   let row = document.createElement("div");
-  row.classList = "row";
+  row.classList.add("row");
   ele.forEach((ele) => {
     let col = document.createElement("div");
-    col.classList = "cell";
+    col.classList.add("cell");
     row.appendChild(col);
   });
   computerBoardContainer.appendChild(row);
