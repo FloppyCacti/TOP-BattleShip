@@ -34,6 +34,7 @@ function addCellClass(cell, a, b, enemy, enemyName) {
   }
 }
 
+// generate rounded random numbers
 function randomNumber(num) {
   return Math.floor(Math.random() * num);
 }
@@ -56,6 +57,7 @@ function computerTurn() {
   }
 }
 
+// check if all the ships are sunk
 function checkShipSunk(player) {
   const ships = player.ships;
 
@@ -63,6 +65,7 @@ function checkShipSunk(player) {
   }
 }
 
+// make carrier, battleship, cruiser, submarine, destroyer
 function makeDefaultShip(player) {
   player.ships = {
     carrier: new Ship(5),
@@ -73,6 +76,7 @@ function makeDefaultShip(player) {
   };
 }
 
+// take the player.ships and place then in the gameboard
 function randomlyPlaceShip(player) {
   for (const ship in player.ships) {
     const row = randomNumber(10);
@@ -86,6 +90,7 @@ function randomlyPlaceShip(player) {
   }
 }
 
+// if going against computer -> checkShipSunk and computerTurn
 function otherPlayersTurn() {
   checkShipSunk(player);
   computerTurn();
