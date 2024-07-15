@@ -13,23 +13,46 @@ function makeGameboardCells(player, container, enemy = false) {
     ele.forEach((ele, j) => {
       let col = document.createElement("div");
       row.appendChild(col);
-      addCellClass(col, i, j, enemy);
+      addCellClass(col, i, j, enemy, computer);
     });
     container.appendChild(row);
   });
 }
 // add class based on where or not there is ship
-function addCellClass(cell, a, b, enemy) {
+function addCellClass(cell, a, b, enemy, enemyName) {
   cell.classList.add("cell");
   if (enemy) {
     cell.classList.add("enemy");
     cell.addEventListener("click", () => {
-      if (computer.gameboard.receiveAttack([a, b]) == "Hit") {
+      if (enemyName.gameboard.receiveAttack([a, b]) == "Hit") {
         cell.classList.add("hit-ship");
       } else {
         cell.classList.add("hit");
       }
+      computerTurn();
     });
+  }
+}
+
+function randomNumber(num) {
+  return Math.floor(Math.random() * num);
+}
+// computer's turn
+function computerTurn() {
+  const row = randomNumber(10);
+  const col = randomNumber(10);
+  const div = playerBoardContainer.querySelector(
+    `.row:nth-child(${row + 1}) .cell:nth-child(${col + 1})`
+  );
+
+  if (div.classList.contains("hit") || div.classList.contains("hit-ship")) {
+    computerTurn();
+  } else {
+    if (player.gameboard.receiveAttack([row, col]) == "Hit") {
+      div.classList.add("hit-ship");
+    } else {
+      div.classList.add("hit");
+    }
   }
 }
 
