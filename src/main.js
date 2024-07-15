@@ -17,6 +17,7 @@ function makeGameboardCells(player, container, enemy = false) {
     });
     container.appendChild(row);
   });
+  makeDefaultShip(player);
 }
 // add class based on where or not there is ship
 function addCellClass(cell, a, b, enemy, enemyName) {
@@ -73,6 +74,16 @@ function checkShipSunk() {
     destroyer.sunk
   ) {
   }
+}
+
+function makeDefaultShip(player) {
+  player.ships = {
+    carrier: new Ship(5),
+    battleship: new Ship(4),
+    cruiser: new Ship(3),
+    submarine: new Ship(3),
+    destroyer: new Ship(2),
+  };
 }
 
 // get div that contains the board
