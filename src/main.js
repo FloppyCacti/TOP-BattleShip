@@ -75,6 +75,8 @@ function makeDefaultShip(player) {
   };
 }
 
+function randomlyPlaceShip(player) {}
+
 // get div that contains the board
 const playerBoardContainer = document.createElement("div");
 const computerBoardContainer = document.createElement("div");
