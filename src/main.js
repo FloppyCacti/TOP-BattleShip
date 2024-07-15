@@ -78,14 +78,18 @@ function makeDefaultShip(player) {
 
 // take the player.ships and place then in the gameboard
 function randomlyPlaceShip(player) {
-  for (const ship in player.ships) {
-    const row = randomNumber(10);
-    const col = randomNumber(10);
-    const vertical = randomNumber(2) ? false : true;
-    let place = player.gameBoard.place(ship, [row, col], vertical);
-
-    while (place == "Outside of range or too close to another ship") {
-      place = player.gameBoard.place(ship, [row, col], vertical);
+  for (let ship in player.ships) {
+    let row = randomNumber(10);
+    let col = randomNumber(10);
+    let vertical = randomNumber(2) === 0;
+    let place = player.gameboard.place(player.ships[ship], [row, col], vertical);
+    console.log(place);
+    while (place !== "Placed") {
+      row = randomNumber(10);
+      col = randomNumber(10);
+      vertical = randomNumber(2) === 0;
+      place = player.gameboard.place(player.ships[ship], [row, col], vertical);
+      console.log(place);
     }
   }
 }
