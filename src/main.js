@@ -16,8 +16,11 @@ function makeGameboardCells(player, container, enemy = false) {
       if (enemy) {
         col.classList.add("enemy");
         col.addEventListener("click", () => {
-          col.classList.add("hit");
-          computer.gameboard.receiveAttack([i, j]);
+          if (computer.gameboard.receiveAttack([i, j]) == "Hit") {
+            col.classList.add("hit-ship");
+          } else {
+            col.classList.add("hit");
+          }
         });
       }
       row.appendChild(col);
