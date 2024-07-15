@@ -28,11 +28,11 @@ class Gameboard {
     const [x, y] = point;
     if (isVertical) {
       for (let i = 0; i < ship.length; i++) {
-        this.board[x][y + i] = ship;
+        this.board[x + i][y] = ship;
       }
     } else {
       for (let i = 0; i < ship.length; i++) {
-        this.board[x + i][y] = ship;
+        this.board[x][y + i] = ship;
       }
     }
   }
