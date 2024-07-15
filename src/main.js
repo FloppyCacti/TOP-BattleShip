@@ -12,21 +12,25 @@ function makeGameboardCells(player, container, enemy = false) {
     row.classList.add("row");
     ele.forEach((ele, j) => {
       let col = document.createElement("div");
-      col.classList.add("cell");
-      if (enemy) {
-        col.classList.add("enemy");
-        col.addEventListener("click", () => {
-          if (computer.gameboard.receiveAttack([i, j]) == "Hit") {
-            col.classList.add("hit-ship");
-          } else {
-            col.classList.add("hit");
-          }
-        });
-      }
       row.appendChild(col);
+      addCellClass(col, i, j, enemy);
     });
     container.appendChild(row);
   });
+}
+// add class based on where or not there is ship
+function addCellClass(cell, a, b, enemy) {
+  cell.classList.add("cell");
+  if (enemy) {
+    cell.classList.add("enemy");
+    cell.addEventListener("click", () => {
+      if (computer.gameboard.receiveAttack([a, b]) == "Hit") {
+        cell.classList.add("hit-ship");
+      } else {
+        cell.classList.add("hit");
+      }
+    });
+  }
 }
 
 // get div that contains the board
