@@ -75,7 +75,18 @@ function makeDefaultShip(player) {
   };
 }
 
-function randomlyPlaceShip(player) {}
+function randomlyPlaceShip(player) {
+  for (const ship in player.ships) {
+    const row = randomNumber(10);
+    const col = randomNumber(10);
+    const vertical = randomNumber(2) ? false : true;
+    let place = player.gameBoard.place(ship, [row, col], vertical);
+
+    while (place == "Outside of range or too close to another ship") {
+      place = player.gameBoard.place(ship, [row, col], vertical);
+    }
+  }
+}
 
 // get div that contains the board
 const playerBoardContainer = document.createElement("div");
