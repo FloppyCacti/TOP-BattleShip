@@ -30,6 +30,7 @@ function addCellClass(cell, a, b, enemy, enemyName) {
         cell.classList.add("hit");
       }
       computerTurn();
+      checkShipSunk();
     });
   }
 }
@@ -53,6 +54,24 @@ function computerTurn() {
     } else {
       div.classList.add("hit");
     }
+  }
+}
+
+function checkShipSunk() {
+  carrier.isSunk();
+  battleship.isSunk();
+  cruiser.isSunk();
+  submarine.isSunk();
+  destroyer.isSunk();
+
+  if (
+    carrier.sunk &&
+    battleship.sunk &&
+    cruiser.sunk &&
+    cruiser.sunk &&
+    submarine.sunk &&
+    destroyer.sunk
+  ) {
   }
 }
 
