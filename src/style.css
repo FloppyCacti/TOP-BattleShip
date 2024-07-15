@@ -40,8 +40,10 @@ div.enemy.cell:hover {
 
 div.hit {
   background-color: rgb(228, 117, 117);
+  pointer-events: none;
 }
 
 div.hit-ship {
   background-color: rgb(184, 212, 156);
+  pointer-events: none;
 }
