@@ -17,7 +17,6 @@ function makeGameboardCells(player, container, enemy = false) {
     });
     container.appendChild(row);
   });
-  makeDefaultShip(player);
 }
 // add class based on where or not there is ship
 function addCellClass(cell, a, b, enemy, enemyName) {
@@ -99,6 +98,13 @@ computerBoardContainer.setAttribute("id", "computerBoardContainer");
 // make boards and inserted them into container
 makeGameboardCells(player, playerBoardContainer);
 makeGameboardCells(computer, computerBoardContainer, true);
+
+// generate ships for both player
+makeDefaultShip(player);
+makeDefaultShip(computer);
+
+// randomly place computer's ships
+randomlyPlaceShip(computer);
 
 // append board containers to main container
 const gameBoardContainer = document.getElementById("gameboard-container");
