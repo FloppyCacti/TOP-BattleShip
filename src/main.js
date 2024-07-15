@@ -58,21 +58,10 @@ function computerTurn() {
   }
 }
 
-function checkShipSunk() {
-  carrier.isSunk();
-  battleship.isSunk();
-  cruiser.isSunk();
-  submarine.isSunk();
-  destroyer.isSunk();
+function checkShipSunk(player) {
+  const ships = player.ships;
 
-  if (
-    carrier.sunk &&
-    battleship.sunk &&
-    cruiser.sunk &&
-    cruiser.sunk &&
-    submarine.sunk &&
-    destroyer.sunk
-  ) {
+  if (ships.every((ship) => ship.sunk)) {
   }
 }
 
