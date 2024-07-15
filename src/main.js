@@ -29,8 +29,7 @@ function addCellClass(cell, a, b, enemy, enemyName) {
       } else {
         cell.classList.add("hit");
       }
-      computerTurn();
-      checkShipSunk();
+      otherPlayersTurn();
     });
   }
 }
@@ -85,6 +84,12 @@ function randomlyPlaceShip(player) {
       place = player.gameBoard.place(ship, [row, col], vertical);
     }
   }
+}
+
+function otherPlayersTurn() {
+  checkShipSunk(player);
+  computerTurn();
+  checkShipSunk(computer);
 }
 
 // get div that contains the board
