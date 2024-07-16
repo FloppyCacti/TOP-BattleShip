@@ -2,8 +2,8 @@ import Player from "./player";
 import Ship from "./ship";
 import "./style.css";
 
-const player = new Player("real");
-const computer = new Player("computer");
+const player = new Player("Player");
+const computer = new Player("Computer");
 
 // function makes board based on player's gameboard
 function makeGameboardCells(player, container, enemy = false) {
@@ -24,7 +24,8 @@ function addCellClass(cell, a, b, enemy, enemyName) {
   if (enemy) {
     cell.classList.add("enemy");
     cell.addEventListener("click", () => {
-      if (enemyName.gameboard.receiveAttack([a, b]) == "Hit") {
+      const result = enemyName.gameboard.receiveAttack([a, b]);
+      if (result == "Hit" || result == "Sunk") {
         cell.classList.add("hit-ship");
       } else {
         cell.classList.add("hit");
@@ -49,7 +50,7 @@ function computerTurn() {
   if (div.classList.contains("hit") || div.classList.contains("hit-ship")) {
     computerTurn();
   } else {
-    if (player.gameboard.receiveAttack([row, col]) == "Hit") {
+    if (player.gameboard.receiveAttack([row, col]) === "Hit") {
       div.classList.add("hit-ship");
     } else {
       div.classList.add("hit");
@@ -60,8 +61,18 @@ function computerTurn() {
 // check if all the ships are sunk
 function checkShipSunk(player) {
   const ships = player.ships;
+  let sunkCount = 0;
+  const numShips = 5;
 
-  if (ships.every((ship) => ship.sunk)) {
+  for (const shipName in ships) {
+    const ship = ships[shipName];
+    if (ship.sunk) {
+      sunkCount++;
+    }
+  }
+
+  if (sunkCount === numShips) {
+    console.log(`${player.name} lost`);
   }
 }
 
@@ -82,14 +93,16 @@ function randomlyPlaceShip(player) {
     let row = randomNumber(10);
     let col = randomNumber(10);
     let vertical = randomNumber(2) === 0;
-    let place = player.gameboard.place(player.ships[ship], [row, col], vertical);
-    console.log(place);
+    let place = player.gameboard.place(
+      player.ships[ship],
+      [row, col],
+      vertical
+    );
     while (place !== "Placed") {
       row = randomNumber(10);
       col = randomNumber(10);
       vertical = randomNumber(2) === 0;
       place = player.gameboard.place(player.ships[ship], [row, col], vertical);
-      console.log(place);
     }
   }
 }
