@@ -40,21 +40,27 @@ class Gameboard {
   }
 
   pointValid(ship, point, isVertical) {
-    if (point[0] >= 0 && point[0] < 10 && point[1] >= 0 && point[1] < 10) {
-      if (isVertical) {
-        if (point[0] + ship.size < 10) {
-          return true;
-        } else {
+    const [x, y] = point;
+    if (isVertical) {
+      if (x + ship.size > 10) {
+        return false;
+      }
+      for (let i = 0; i < ship.size; i++) {
+        if (this.board[x + i][y] !== 0) {
           return false;
-        }
-      } else {
-        if (point[1] + ship.size < 10) {
-          return true;
         }
       }
     } else {
-      return false;
+      if (y + ship.size > 10) {
+        return false;
+      }
+      for (let i = 0; i < ship.size; i++) {
+        if (this.board[x][y + i] !== 0) {
+          return false;
+        }
+      }
     }
+    return true;
   }
 
   receiveAttack(point) {
@@ -62,7 +68,7 @@ class Gameboard {
     if (this.pointContainsShip(point)) {
       this.board[x][y].hit();
       if (this.board[x][y].sunk) {
-        return `ship has been sunk`;
+        return `Sunk`;
       }
       return "Hit";
     }
@@ -75,16 +81,16 @@ class Gameboard {
     const board = this.board;
 
     if (border === 0) {
-      const cell = board[x][y];
-      return typeof cell === "object";
+      return typeof board[x][y] === "object";
     } else {
       if (isVertical) {
         for (let i = 0; i < ship.size; i++) {
-          // Check within the board boundaries to avoid out-of-bounds errors
           if (
-            (x + i < board.length &&
+            (x + i < 10 &&
+              y + border < 10 &&
               typeof board[x + i][y + border] === "object") ||
-            (x + i < board.length &&
+            (x + i < 10 &&
+              y - border >= 0 &&
               typeof board[x + i][y - border] === "object")
           ) {
             return true;
@@ -92,15 +98,12 @@ class Gameboard {
         }
       } else {
         for (let i = 0; i < ship.size; i++) {
-          // Check within the board boundaries to avoid out-of-bounds errors
           if (
-            (x - border >= 0 &&
-              x + border < 10 &&
-              y + i < board[0].length &&
+            (x + border < 10 &&
+              y + i < 10 &&
               typeof board[x + border][y + i] === "object") ||
             (x - border >= 0 &&
-              x + border < 10 &&
-              y + i < board[0].length &&
+              y + i < 10 &&
               typeof board[x - border][y + i] === "object")
           ) {
             return true;
