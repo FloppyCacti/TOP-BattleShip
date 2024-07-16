@@ -61,7 +61,6 @@ class Gameboard {
     const [x, y] = point;
     if (this.pointContainsShip(point)) {
       this.board[x][y].hit();
-      this.board[x][y].isSunk();
       if (this.board[x][y].sunk) {
         return `ship has been sunk`;
       }
@@ -83,8 +82,10 @@ class Gameboard {
         for (let i = 0; i < ship.size; i++) {
           // Check within the board boundaries to avoid out-of-bounds errors
           if (
-            (x + i < board.length && typeof board[x + i][y + border] === "object") ||
-            (x + i < board.length && typeof board[x + i][y - border] === "object")
+            (x + i < board.length &&
+              typeof board[x + i][y + border] === "object") ||
+            (x + i < board.length &&
+              typeof board[x + i][y - border] === "object")
           ) {
             return true;
           }
