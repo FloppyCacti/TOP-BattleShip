@@ -1,8 +1,8 @@
 const GameBoard = require("./gameboard");
 
 class Player {
-  constructor(type) {
-    this.type = type;
+  constructor(name) {
+    this.name = name;
     this.gameboard = new GameBoard();
     this.ships = {};
   }
