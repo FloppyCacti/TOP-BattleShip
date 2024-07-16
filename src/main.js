@@ -34,7 +34,6 @@ function addCellClass(cell, a, b, enemy, enemyName) {
     });
   }
 }
-
 // generate rounded random numbers
 function randomNumber(num) {
   return Math.floor(Math.random() * num);
@@ -57,7 +56,6 @@ function computerTurn() {
     }
   }
 }
-
 // check if all the ships are sunk
 function checkShipSunk(player) {
   const ships = player.ships;
@@ -75,7 +73,6 @@ function checkShipSunk(player) {
     console.log(`${player.name} lost`);
   }
 }
-
 // make carrier, battleship, cruiser, submarine, destroyer
 function makeDefaultShip(player) {
   player.ships = {
@@ -86,18 +83,13 @@ function makeDefaultShip(player) {
     destroyer: new Ship(2),
   };
 }
-
 // take the player.ships and place then in the gameboard
 function randomlyPlaceShip(player) {
   for (let ship in player.ships) {
     let row = randomNumber(10);
     let col = randomNumber(10);
     let vertical = randomNumber(2) === 0;
-    let place = player.gameboard.place(
-      player.ships[ship],
-      [row, col],
-      vertical
-    );
+    let place = player.gameboard.place(player.ships[ship], [row, col], vertical);
     while (place !== "Placed") {
       row = randomNumber(10);
       col = randomNumber(10);
@@ -106,7 +98,6 @@ function randomlyPlaceShip(player) {
     }
   }
 }
-
 // if going against computer -> checkShipSunk and computerTurn
 function otherPlayersTurn() {
   checkShipSunk(player);
