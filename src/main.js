@@ -78,6 +78,9 @@ function checkShipSunk(player) {
     const result = document.querySelector("#showWinner");
     result.innerHTML = `${player.name} won, Go again?`;
     result.style.display = "block";
+    // generate ships for both player
+    makeDefaultShip(player);
+    makeDefaultShip(computer);
     gameOver = true; // Set game over flag
   }
 }
@@ -207,6 +210,11 @@ document.querySelector("#resetGame").addEventListener("click", (event) => {
 
   makeGameboardCells(player, playerBoardContainer);
   makeGameboardCells(computer, computerBoardContainer, true);
+
+  // generate ships for both player
+  makeDefaultShip(player);
+  makeDefaultShip(computer);
+
   randomlyPlaceShip(computer);
 });
 
