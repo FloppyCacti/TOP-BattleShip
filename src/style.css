@@ -52,6 +52,7 @@ div.ship-cell {
 dialog.show {
   display: block;
   border-radius: 10px;
+  text-align: center;
 }
 
 dialog.hide {
