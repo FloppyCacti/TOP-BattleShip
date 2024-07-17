@@ -4,6 +4,7 @@ import "./style.css";
 
 const player = new Player("Player");
 const computer = new Player("Computer");
+let gameOver = false;
 
 // function makes board based on player's gameboard
 function makeGameboardCells(player, container, enemy = false) {
@@ -77,6 +78,7 @@ function checkShipSunk(player) {
     const result = document.querySelector("#showWinner");
     result.innerHTML = `${player.name} won, Go again?`;
     result.style.display = "block";
+    gameOver = true; // Set game over flag
   }
 }
 // make carrier, battleship, cruiser, submarine, destroyer
@@ -210,6 +212,7 @@ document.querySelector("#resetGame").addEventListener("click", (event) => {
 
 document.querySelector("#randomBoard").addEventListener("click", (event) => {
   event.preventDefault();
+  gameOver = false; // Reset game over flag
   const dialog = document.querySelector("dialog");
   dialog.querySelector("form").reset();
 
