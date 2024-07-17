@@ -107,6 +107,7 @@ function otherPlayersTurn() {
   computerTurn();
   checkShipSunk(computer);
 }
+// check if input value are valid
 document.querySelector("#startGame").addEventListener("click", (event) => {
   event.preventDefault();
   const form = document.getElementById("shipForm");
@@ -133,7 +134,7 @@ document.querySelector("#startGame").addEventListener("click", (event) => {
     });
   }
 });
-
+// place ship in player's board and return boolean
 function placePlayerShip() {
   let isValid = true;
 
@@ -168,7 +169,7 @@ function placePlayerShip() {
 
   return isValid;
 }
-
+// highlight player board cells
 function highlightShipCells(ship, startRow, startCol, isVertical) {
   for (let i = 0; i < ship.size; i++) {
     const row = isVertical === "vertical" ? startRow + i : startRow;
