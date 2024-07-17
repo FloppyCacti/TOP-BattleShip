@@ -51,6 +51,7 @@ div.ship-cell {
 
 dialog.show {
   display: block;
+  border-radius: 10px;
 }
 
 dialog.hide {
@@ -63,4 +64,21 @@ dialog ul {
 
 .error {
   color: red;
+}
+
+ul {
+  padding: 0;
+}
+
+li > div {
+  width: 250px;
+  text-align: right;
+  margin-left: auto;
+}
+
+li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
