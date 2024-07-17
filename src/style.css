@@ -49,6 +49,10 @@ div.ship-cell {
   pointer-events: none;
 }
 
+div.ship-cell.hit-ship {
+  background-color: aqua;
+}
+
 dialog.show {
   display: block;
   border-radius: 10px;
