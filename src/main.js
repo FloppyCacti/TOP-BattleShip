@@ -182,6 +182,22 @@ function highlightShipCells(ship, startRow, startCol, isVertical) {
     }
   }
 }
+document.querySelector("#resetGame").addEventListener("click", (event) => {
+  event.preventDefault();
+  const dialog = document.querySelector("dialog");
+  dialog.querySelector("form").reset();
+
+  player.gameboard.board = player.gameboard.buildBoard();
+  computer.gameboard.board = computer.gameboard.buildBoard();
+  dialog.className = "show";
+
+  playerBoardContainer.innerHTML = "";
+  computerBoardContainer.innerHTML = "";
+
+  makeGameboardCells(player, playerBoardContainer);
+  makeGameboardCells(computer, computerBoardContainer, true);
+  randomlyPlaceShip(computer);
+});
 
 // get div that contains the board
 const playerBoardContainer = document.createElement("div");
