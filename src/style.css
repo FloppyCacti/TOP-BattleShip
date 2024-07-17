@@ -43,7 +43,24 @@ div.hit {
   pointer-events: none;
 }
 
-div.hit-ship {
+div.hit-ship,
+div.ship-cell {
   background-color: rgb(184, 212, 156);
   pointer-events: none;
+}
+
+dialog.show {
+  display: block;
+}
+
+dialog.hide {
+  display: none;
+}
+
+dialog ul {
+  list-style: none;
+}
+
+.error {
+  color: red;
 }
