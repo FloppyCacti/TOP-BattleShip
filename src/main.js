@@ -155,7 +155,7 @@ function placePlayerShip() {
         if (place === "Placed") {
           const errorSpan = liElement.querySelector(".error");
           errorSpan.textContent = "";
-          highlightShipCells(player.ships[ship], firstInput, secondInput, dropdown);
+          highlightPlayerShips();
         } else {
           isValid = false;
           const errorSpan = liElement.querySelector(".error");
@@ -169,17 +169,22 @@ function placePlayerShip() {
 
   return isValid;
 }
-// highlight player board cells
-function highlightShipCells(ship, startRow, startCol, isVertical) {
-  for (let i = 0; i < ship.size; i++) {
-    const row = isVertical === "vertical" ? startRow + i : startRow;
-    const col = isVertical === "horizontal" ? startCol + i : startCol;
-    const cell = document.querySelector(
-      `#playerBoardContainer .row:nth-child(${row + 1}) .cell:nth-child(${col + 1})`
-    );
-    if (cell) {
-      cell.classList.add("ship-cell");
-    }
+// Function to highlight player's ships on the board
+function highlightPlayerShips() {
+  for (let ship in player.ships) {
+    const shipInstance = player.ships[ship];
+    player.gameboard.board.forEach((row, i) => {
+      row.forEach((cell, j) => {
+        if (cell === shipInstance) {
+          const cellElement = playerBoardContainer.querySelector(
+            `.row:nth-child(${i + 1}) .cell:nth-child(${j + 1})`
+          );
+          if (cellElement) {
+            cellElement.classList.add("ship-cell");
+          }
+        }
+      });
+    });
   }
 }
 document.querySelector("#resetGame").addEventListener("click", (event) => {
@@ -197,6 +202,27 @@ document.querySelector("#resetGame").addEventListener("click", (event) => {
   makeGameboardCells(player, playerBoardContainer);
   makeGameboardCells(computer, computerBoardContainer, true);
   randomlyPlaceShip(computer);
+});
+
+document.querySelector("#randomBoard").addEventListener("click", (event) => {
+  event.preventDefault();
+  const dialog = document.querySelector("dialog");
+  dialog.querySelector("form").reset();
+
+  player.gameboard.board = player.gameboard.buildBoard();
+  computer.gameboard.board = computer.gameboard.buildBoard();
+
+  playerBoardContainer.innerHTML = "";
+  computerBoardContainer.innerHTML = "";
+
+  makeGameboardCells(player, playerBoardContainer);
+  makeGameboardCells(computer, computerBoardContainer, true);
+  randomlyPlaceShip(computer);
+  randomlyPlaceShip(player);
+
+  highlightPlayerShips();
+
+  dialog.className = "hide";
 });
 
 // get div that contains the board
