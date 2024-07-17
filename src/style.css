@@ -67,6 +67,10 @@ dialog ul {
   list-style: none;
 }
 
+#showWinner {
+  display: none;
+}
+
 .error {
   color: red;
 }
