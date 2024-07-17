@@ -73,7 +73,10 @@ function checkShipSunk(player) {
   }
 
   if (sunkCount === numShips) {
-    console.log(`${player.name} lost`);
+    document.querySelector("dialog").className = "show";
+    const result = document.querySelector("#showWinner");
+    result.innerHTML = `${player.name} won, Go again?`;
+    result.style.display = "block";
   }
 }
 // make carrier, battleship, cruiser, submarine, destroyer
@@ -189,6 +192,7 @@ function highlightPlayerShips() {
 }
 document.querySelector("#resetGame").addEventListener("click", (event) => {
   event.preventDefault();
+  document.querySelector("#showWinner").style.display = "none";
   const dialog = document.querySelector("dialog");
   dialog.querySelector("form").reset();
 
