@@ -14,6 +14,9 @@ function makeGameboardCells(player, container, enemy = false) {
       let col = document.createElement("div");
       row.appendChild(col);
       addCellClass(col, i, j, enemy, computer);
+      if (!enemy && ele) {
+        col.classList.add("ship-cell");
+      }
     });
     container.appendChild(row);
   });
@@ -103,6 +106,80 @@ function otherPlayersTurn() {
   checkShipSunk(player);
   computerTurn();
   checkShipSunk(computer);
+}
+document.querySelector("#startGame").addEventListener("click", (event) => {
+  event.preventDefault();
+  const form = document.getElementById("shipForm");
+  const isValid = form.checkValidity();
+
+  if (isValid) {
+    const errors = document.querySelectorAll(".error");
+    errors.forEach((error) => (error.textContent = ""));
+
+    if (placePlayerShip()) {
+      document.querySelector("dialog").classList.add("hide");
+    }
+  } else {
+    const inputs = form.querySelectorAll("input:required");
+    inputs.forEach((input) => {
+      const errorSpan = input.parentNode.querySelector(".error");
+      if (errorSpan) {
+        if (input.validity.valueMissing) {
+          errorSpan.textContent = "This field is required.";
+        } else {
+          errorSpan.textContent = "";
+        }
+      }
+    });
+  }
+});
+
+function placePlayerShip() {
+  let isValid = true;
+
+  for (const ship in player.ships) {
+    const liElement = document.querySelector(`#${ship}-input`);
+    if (liElement) {
+      const inputs = liElement.getElementsByTagName("input");
+      const dropdown = liElement.getElementsByTagName("select")[0].value;
+      if (inputs.length >= 2) {
+        const firstInput = parseInt(inputs[0].value, 10);
+        const secondInput = parseInt(inputs[1].value, 10);
+
+        const place = player.gameboard.place(
+          player.ships[ship],
+          [firstInput, secondInput],
+          dropdown
+        );
+        if (place === "Placed") {
+          const errorSpan = liElement.querySelector(".error");
+          errorSpan.textContent = "";
+          highlightShipCells(player.ships[ship], firstInput, secondInput, dropdown);
+        } else {
+          isValid = false;
+          const errorSpan = liElement.querySelector(".error");
+          if (errorSpan) {
+            errorSpan.textContent = `Cannot place ${ship} at the specified location.`;
+          }
+        }
+      }
+    }
+  }
+
+  return isValid;
+}
+
+function highlightShipCells(ship, startRow, startCol, isVertical) {
+  for (let i = 0; i < ship.size; i++) {
+    const row = isVertical === "vertical" ? startRow + i : startRow;
+    const col = isVertical === "horizontal" ? startCol + i : startCol;
+    const cell = document.querySelector(
+      `#playerBoardContainer .row:nth-child(${row + 1}) .cell:nth-child(${col + 1})`
+    );
+    if (cell) {
+      cell.classList.add("ship-cell");
+    }
+  }
 }
 
 // get div that contains the board
